@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Target, FolderOpen, BookOpen, Home, Menu, X, Settings } from "lucide-react"
+import { Target, FolderOpen, BookOpen, Home, Menu, X, Settings, Wrench } from "lucide-react"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
@@ -13,6 +13,7 @@ const navigation = [
   { name: "Projects", href: "/projects", icon: FolderOpen },
   { name: "Reviews", href: "/reviews", icon: BookOpen },
   { name: "Env Check", href: "/env-check", icon: Settings },
+  { name: "Env Setup", href: "/env-setup", icon: Wrench },
 ]
 
 export function Navigation() {
