@@ -1,19 +1,20 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useLifeAgentStore } from "@/lib/store"
-import { X, Send, Loader2 } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { chatAgent } from "@/lib/agents/chat-agent-v2"
+import { X, Send, Loader2, Wrench } from "lucide-react"
 
 interface Message {
   id: string
   role: "user" | "assistant"
   content: string
   timestamp: Date
+  toolResults?: any[]
 }
 
 interface ChatAgentProps {
@@ -26,14 +27,13 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
       id: "1",
       role: "assistant",
       content:
-        "Hi! I'm your LifeAgent assistant. I can help you manage your goals, projects, and reflections. What would you like to work on today?",
+        "你好！我是你的LifeAgent智能助手。我可以帮你管理项目、设定目标、添加任务和记录反思。有什么我可以帮助你的吗？",
       timestamp: new Date(),
     },
   ])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const scrollAreaRef = useRef<HTMLDivElement>(null)
-  const { addProject, addGoal, addReview, addTask } = useLifeAgentStore()
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -57,21 +57,15 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
     setIsLoading(true)
 
     try {
-      // Simulate AI processing and tool calling
-      const response = await processUserInput(input)
+      // 使用新的ChatAgent处理消息
+      const response = await chatAgent.processMessage(input)
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content: response.message,
         timestamp: new Date(),
-      }
-
-      // Execute any tool calls
-      if (response.toolCalls) {
-        for (const toolCall of response.toolCalls) {
-          await executeTool(toolCall)
-        }
+        toolResults: response.toolResults,
       }
 
       setMessages((prev) => [...prev, assistantMessage])
@@ -79,7 +73,7 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Sorry, I encountered an error. Please try again.",
+        content: "抱歉，我遇到了一些问题。请稍后再试。",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -88,125 +82,11 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
     }
   }
 
-  const processUserInput = async (input: string): Promise<{ message: string; toolCalls?: any[] }> => {
-    // Simple intent recognition (in a real app, this would use AI SDK)
-    const lowerInput = input.toLowerCase()
-
-    if (lowerInput.includes("create project") || lowerInput.includes("new project")) {
-      const projectName = extractProjectName(input)
-      return {
-        message: `I'll create a new project called "${projectName}" for you. This project will help you stay organized and track your progress.`,
-        toolCalls: [
-          {
-            type: "addProject",
-            data: {
-              name: projectName,
-              description: `Project created from conversation: ${input}`,
-              status: "active",
-              goals: [],
-            },
-          },
-        ],
-      }
-    }
-
-    if (lowerInput.includes("add goal") || lowerInput.includes("new goal")) {
-      const goalTitle = extractGoalTitle(input)
-      return {
-        message: `I've added "${goalTitle}" as a new goal. This will help guide your projects and activities.`,
-        toolCalls: [
-          {
-            type: "addGoal",
-            data: {
-              title: goalTitle,
-              description: `Goal created from conversation: ${input}`,
-              stage: "quarter",
-            },
-          },
-        ],
-      }
-    }
-
-    if (lowerInput.includes("reflect") || lowerInput.includes("review")) {
-      return {
-        message: `I'll help you create a reflection entry. What specific aspects would you like to reflect on?`,
-        toolCalls: [
-          {
-            type: "addReview",
-            data: {
-              type: "daily",
-              entries: [
-                {
-                  content: input,
-                  tags: ["conversation", "reflection"],
-                },
-              ],
-            },
-          },
-        ],
-      }
-    }
-
-    if (lowerInput.includes("task") || lowerInput.includes("todo")) {
-      const taskTitle = extractTaskTitle(input)
-      return {
-        message: `I've added "${taskTitle}" to your task list. You can find it in your dashboard.`,
-        toolCalls: [
-          {
-            type: "addTask",
-            data: {
-              title: taskTitle,
-              description: `Task created from conversation: ${input}`,
-              dueDate: new Date().toISOString(),
-              completed: false,
-            },
-          },
-        ],
-      }
-    }
-
-    return {
-      message: `I understand you're saying: "${input}". I can help you with creating projects, setting goals, adding tasks, or reflecting on your progress. What would you like to focus on?`,
-    }
-  }
-
-  const executeTool = async (toolCall: any) => {
-    switch (toolCall.type) {
-      case "addProject":
-        addProject(toolCall.data)
-        break
-      case "addGoal":
-        addGoal(toolCall.data)
-        break
-      case "addReview":
-        addReview(toolCall.data)
-        break
-      case "addTask":
-        addTask(toolCall.data)
-        break
-    }
-  }
-
-  const extractProjectName = (input: string): string => {
-    const match = input.match(/(?:create|new)\s+project\s+(?:called\s+)?["']?([^"']+)["']?/i)
-    return match ? match[1].trim() : "New Project"
-  }
-
-  const extractGoalTitle = (input: string): string => {
-    const match = input.match(/(?:add|new)\s+goal\s+(?:to\s+)?["']?([^"']+)["']?/i)
-    return match ? match[1].trim() : "New Goal"
-  }
-
-  const extractTaskTitle = (input: string): string => {
-    const match = input.match(/(?:add|create|new)\s+task\s+(?:to\s+)?["']?([^"']+)["']?/i)
-    return match ? match[1].trim() : "New Task"
-  }
-
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b">
-        <h3 className="font-semibold text-slate-800">LifeAgent Assistant</h3>
+        <h3 className="font-semibold text-slate-800">LifeAgent 智能助手</h3>
         <Button variant="ghost" size="sm" onClick={onClose}>
           <X className="h-4 w-4" />
         </Button>
@@ -217,20 +97,44 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
         <div className="space-y-4">
           {messages.map((message) => (
             <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div
-                className={`max-w-[80%] p-3 rounded-lg ${
-                  message.role === "user" ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-800"
-                }`}
-              >
-                <p className="text-sm">{message.content}</p>
+              <div className="max-w-[85%]">
+                <div
+                  className={`p-3 rounded-lg ${
+                    message.role === "user" ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-800"
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                </div>
+
+                {/* 显示工具执行结果 */}
+                {message.toolResults && message.toolResults.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    {message.toolResults.map((result, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-xs">
+                        <Wrench className="h-3 w-3" />
+                        <Badge variant={result.success ? "default" : "destructive"} className="text-xs">
+                          {result.toolCall.name}
+                        </Badge>
+                        {result.success ? (
+                          <span className="text-green-600">✓</span>
+                        ) : (
+                          <span className="text-red-600">✗</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <span className="text-xs opacity-70 mt-1 block">{message.timestamp.toLocaleTimeString()}</span>
               </div>
             </div>
           ))}
+
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-slate-100 p-3 rounded-lg">
+              <div className="bg-slate-100 p-3 rounded-lg flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin" />
+                <span className="text-sm text-slate-600">正在思考...</span>
               </div>
             </div>
           )}
@@ -243,13 +147,15 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything about your goals, projects, or reflections..."
+            placeholder="告诉我你想要做什么..."
             disabled={isLoading}
+            className="flex-1"
           />
           <Button type="submit" disabled={isLoading || !input.trim()}>
             <Send className="h-4 w-4" />
           </Button>
         </div>
+        <p className="text-xs text-slate-500 mt-2">我可以帮你创建项目、设定目标、添加任务或记录反思</p>
       </form>
     </div>
   )
