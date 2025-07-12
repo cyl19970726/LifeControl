@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog"
 import { useLifeAgentStore } from "@/lib/store"
 import { FolderOpen, Plus, Edit, Trash2, Play, Pause, CheckCircle } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export default function ProjectsPage() {
   const { projects, goals, tasks, addProject, updateProject, deleteProject } = useLifeAgentStore()
@@ -31,6 +32,8 @@ export default function ProjectsPage() {
     status: "active" as "active" | "paused" | "completed",
     goals: [] as string[],
   })
+
+  const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -201,7 +204,10 @@ export default function ProjectsPage() {
 
             return (
               <Card key={project.id} className="bg-white shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
+                <CardHeader
+                  className="pb-3 cursor-pointer hover:bg-slate-50 transition-colors rounded-t-lg"
+                  onClick={() => router.push(`/projects/${project.id}`)}
+                >
                   <div className="flex justify-between items-start">
                     <Badge className={getStatusColor(project.status)}>
                       <div className="flex items-center gap-1">
