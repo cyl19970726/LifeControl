@@ -1,88 +1,89 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { projectRepository } from "@/lib/db/repositories"
+import { taskRepository } from "@/lib/db/repositories"
 
-// 获取单个项目详情
+// 获取单个任务详情
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const project = await projectRepository.findById(params.id)
+    const task = await taskRepository.findById(params.id)
 
-    if (!project) {
+    if (!task) {
       return NextResponse.json(
         {
           success: false,
-          error: "Project not found",
+          error: "Task not found",
         },
         { status: 404 },
       )
     }
 
-    // 获取项目统计信息
-    const stats = await projectRepository.getProjectStats(params.id)
-
     return NextResponse.json({
       success: true,
-      data: {
-        ...project,
-        stats,
-      },
+      data: task,
     })
   } catch (error) {
-    console.error("Failed to fetch project:", error)
+    console.error("Failed to fetch task:", error)
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to fetch project",
+        error: "Failed to fetch task",
       },
       { status: 500 },
     )
   }
 }
 
-// 更新项目
+// 更新任务
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const body = await request.json()
 
     const updateData: any = {}
-    if (body.name) updateData.name = body.name
+    if (body.title) updateData.title = body.title
     if (body.description !== undefined) updateData.description = body.description
-    if (body.status) updateData.status = body.status
-    if (body.startDate) updateData.startDate = new Date(body.startDate)
-    if (body.endDate) updateData.endDate = new Date(body.endDate)
+    if (body.priority) updateData.priority = body.priority
+    if (body.dueDate) updateData.dueDate = new Date(body.dueDate)
+    if (typeof body.completed === "boolean") {
+      updateData.completed = body.completed
+      if (body.completed) {
+        updateData.completedAt = new Date()
+      } else {
+        updateData.completedAt = null
+      }
+    }
 
-    const project = await projectRepository.update(params.id, updateData)
+    const task = await taskRepository.update(params.id, updateData)
 
     return NextResponse.json({
       success: true,
-      data: project,
+      data: task,
     })
   } catch (error) {
-    console.error("Failed to update project:", error)
+    console.error("Failed to update task:", error)
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to update project",
+        error: "Failed to update task",
       },
       { status: 500 },
     )
   }
 }
 
-// 删除项目
+// 删除任务
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    await projectRepository.delete(params.id)
+    await taskRepository.delete(params.id)
 
     return NextResponse.json({
       success: true,
-      message: "Project deleted successfully",
+      message: "Task deleted successfully",
     })
   } catch (error) {
-    console.error("Failed to delete project:", error)
+    console.error("Failed to delete task:", error)
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to delete project",
+        error: "Failed to delete task",
       },
       { status: 500 },
     )
