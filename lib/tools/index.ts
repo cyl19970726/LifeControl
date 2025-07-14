@@ -5,5 +5,4 @@ import "./task-tools"
 import "./review-tools"
 
 // 导出工具注册表
-export { toolRegistry } from "./registry"
 export type { ToolDefinition, ToolResult } from "./types"
