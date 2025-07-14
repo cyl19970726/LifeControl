@@ -1,27 +1,22 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { taskRepository } from "@/lib/db/repositories"
+import { TaskRepository } from "@/lib/db/repositories/task-repository"
+
+const taskRepository = new TaskRepository()
 
 // 获取所有任务
 export async function GET(request: NextRequest) {
   try {
     const userId = "temp-user-id" // TODO: 从认证中获取用户ID
-
     const searchParams = request.nextUrl.searchParams
+
     const completed = searchParams.get("completed")
     const projectId = searchParams.get("projectId")
-    const upcoming = searchParams.get("upcoming") === "true"
-    const overdue = searchParams.get("overdue") === "true"
 
     let tasks
-
-    if (upcoming) {
-      tasks = await taskRepository.findUpcomingTasks(userId)
-    } else if (overdue) {
-      tasks = await taskRepository.findOverdueTasks(userId)
+    if (completed !== null) {
+      tasks = await taskRepository.findByStatus(userId, completed === "true")
     } else if (projectId) {
       tasks = await taskRepository.findByProjectId(projectId)
-    } else if (completed !== null) {
-      tasks = await taskRepository.findByStatus(userId, completed === "true")
     } else {
       tasks = await taskRepository.findByUserId(userId)
     }

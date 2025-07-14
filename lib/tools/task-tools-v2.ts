@@ -1,5 +1,7 @@
 import { toolRegistry } from "./registry"
-import { taskRepository } from "@/lib/db/repositories"
+import { TaskRepository } from "@/lib/db/repositories/task-repository"
+
+const taskRepository = new TaskRepository()
 
 // 创建任务工具 - 数据库版本
 toolRegistry.register({
@@ -54,9 +56,7 @@ toolRegistry.register({
       return {
         success: true,
         task,
-        message: `任务 "${params.title}" 创建成功并已保存到数据库！${
-          params.projectId ? " 已关联到指定项目。" : ""
-        }`,
+        message: `任务 "${params.title}" 创建成功并已保存到数据库！`,
       }
     } catch (error) {
       throw new Error(`创建任务失败: ${error.message}`)
@@ -80,7 +80,7 @@ toolRegistry.register({
   },
   execute: async (params: { taskId: string }) => {
     try {
-      const task = await taskRepository.completeTask(params.taskId)
+      const task = await taskRepository.markCompleted(params.taskId)
 
       return {
         success: true,
@@ -93,79 +93,10 @@ toolRegistry.register({
   },
 })
 
-// 获取任务列表工具
-toolRegistry.register({
-  name: "listTasks",
-  description: "获取任务列表，可按状态、项目等筛选",
-  parameters: {
-    type: "object",
-    properties: {
-      completed: {
-        type: "boolean",
-        description: "筛选已完成或未完成的任务",
-      },
-      projectId: {
-        type: "string",
-        description: "按项目ID筛选任务",
-      },
-      upcoming: {
-        type: "boolean",
-        description: "获取即将到期的任务（7天内）",
-      },
-      overdue: {
-        type: "boolean",
-        description: "获取已逾期的任务",
-      },
-    },
-  },
-  execute: async (params: {
-    completed?: boolean
-    projectId?: string
-    upcoming?: boolean
-    overdue?: boolean
-  }) => {
-    try {
-      const userId = "temp-user-id" // TODO: 从认证中获取真实用户ID
-
-      let tasks
-
-      if (params.upcoming) {
-        tasks = await taskRepository.findUpcomingTasks(userId)
-      } else if (params.overdue) {
-        tasks = await taskRepository.findOverdueTasks(userId)
-      } else if (params.projectId) {
-        tasks = await taskRepository.findByProjectId(params.projectId)
-      } else if (typeof params.completed === "boolean") {
-        tasks = await taskRepository.findByStatus(userId, params.completed)
-      } else {
-        tasks = await taskRepository.findByUserId(userId)
-      }
-
-      return {
-        success: true,
-        tasks: tasks.map((t) => ({
-          id: t.id,
-          title: t.title,
-          description: t.description,
-          completed: t.completed,
-          priority: t.priority,
-          dueDate: t.dueDate,
-          projectName: t.project?.name,
-          createdAt: t.createdAt,
-        })),
-        count: tasks.length,
-        summary: `找到 ${tasks.length} 个任务`,
-      }
-    } catch (error) {
-      throw new Error(`获取任务列表失败: ${error.message}`)
-    }
-  },
-})
-
 // 获取任务统计工具
 toolRegistry.register({
   name: "getTaskStats",
-  description: "获取任务统计信息，包括完成率、逾期任务等",
+  description: "获取用户的任务统计信息",
   parameters: {
     type: "object",
     properties: {},
@@ -173,16 +104,51 @@ toolRegistry.register({
   execute: async () => {
     try {
       const userId = "temp-user-id" // TODO: 从认证中获取真实用户ID
-
       const stats = await taskRepository.getTaskStats(userId)
 
       return {
         success: true,
         stats,
-        summary: `总任务 ${stats.total} 个，已完成 ${stats.completed} 个，完成率 ${stats.completionRate}%，逾期 ${stats.overdue} 个`,
+        summary: `总任务: ${stats.total}个，已完成: ${stats.completed}个，待完成: ${stats.pending}个，逾期: ${stats.overdue}个，完成率: ${stats.completionRate}%`,
       }
     } catch (error) {
       throw new Error(`获取任务统计失败: ${error.message}`)
+    }
+  },
+})
+
+// 获取即将到期的任务
+toolRegistry.register({
+  name: "getUpcomingTasks",
+  description: "获取即将到期的任务列表",
+  parameters: {
+    type: "object",
+    properties: {
+      days: {
+        type: "number",
+        description: "未来几天内的任务，默认7天",
+      },
+    },
+  },
+  execute: async (params: { days?: number }) => {
+    try {
+      const userId = "temp-user-id" // TODO: 从认证中获取真实用户ID
+      const tasks = await taskRepository.findUpcoming(userId, params.days || 7)
+
+      return {
+        success: true,
+        tasks: tasks.map((t) => ({
+          id: t.id,
+          title: t.title,
+          dueDate: t.dueDate,
+          priority: t.priority,
+          projectName: t.project?.name,
+        })),
+        count: tasks.length,
+        summary: `找到 ${tasks.length} 个即将到期的任务`,
+      }
+    } catch (error) {
+      throw new Error(`获取即将到期任务失败: ${error.message}`)
     }
   },
 })
