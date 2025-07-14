@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import { chatAgent } from "@/lib/agents/chat-agent-v2"
 import { X, Send, Loader2, Wrench } from "lucide-react"
+// 在文件顶部添加导入
+import { mockChatAgent } from "@/lib/agents/chat-agent-mock"
 
 interface Message {
   id: string
@@ -41,6 +42,8 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
     }
   }, [messages])
 
+  // 在 handleSubmit 函数中，将真实的 chatAgent 调用替换为模拟调用：
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim() || isLoading) return
@@ -57,8 +60,8 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
     setIsLoading(true)
 
     try {
-      // 使用新的ChatAgent处理消息
-      const response = await chatAgent.processMessage(input)
+      // 使用模拟的 ChatAgent 进行测试
+      const response = await mockChatAgent.processMessage(input)
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
