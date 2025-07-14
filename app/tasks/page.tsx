@@ -1,9 +1,8 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,9 +17,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Checkbox } from "@/components/ui/checkbox"
-import { CheckSquare, Plus, Calendar, AlertCircle, Clock, TrendingUp } from "lucide-react"
-import type { TaskWithRelations } from "@/lib/db/repositories/task-repository"
+import { CheckSquare, Plus, Edit, Trash2, Calendar, AlertTriangle, Clock, TrendingUp } from "lucide-react"
+
+interface Task {
+  id: string
+  title: string
+  description: string
+  completed: boolean
+  priority: "LOW" | "MEDIUM" | "HIGH" | "URGENT"
+  dueDate: string | null
+  projectName?: string
+  createdAt: string
+}
 
 interface TaskStats {
   total: number
@@ -31,16 +39,16 @@ interface TaskStats {
 }
 
 export default function TasksPage() {
-  const [tasks, setTasks] = useState<TaskWithRelations[]>([])
+  const [tasks, setTasks] = useState<Task[]>([])
   const [stats, setStats] = useState<TaskStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [editingTask, setEditingTask] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    priority: "MEDIUM",
+    priority: "MEDIUM" as "LOW" | "MEDIUM" | "HIGH" | "URGENT",
     dueDate: "",
-    projectId: "",
   })
 
   useEffect(() => {
@@ -48,40 +56,47 @@ export default function TasksPage() {
     fetchStats()
   }, [])
 
-  const fetchTasks = async () => {
+  const fetchTasks = async (filter?: string) => {
     try {
-      const response = await fetch("/api/tasks")
+      setLoading(true)
+      const url = filter ? `/api/tasks?${filter}` : "/api/tasks"
+      const response = await fetch(url)
       const result = await response.json()
+
       if (result.success) {
         setTasks(result.data)
+      } else {
+        console.error("Failed to fetch tasks:", result.error)
       }
     } catch (error) {
-      console.error("Failed to fetch tasks:", error)
-    }
-  }
-
-  const fetchStats = async () => {
-    try {
-      // 这里应该调用统计API，暂时用模拟数据
-      setStats({
-        total: 25,
-        completed: 18,
-        pending: 7,
-        overdue: 2,
-        completionRate: 72,
-      })
-    } catch (error) {
-      console.error("Failed to fetch stats:", error)
+      console.error("Error fetching tasks:", error)
     } finally {
       setLoading(false)
     }
   }
 
+  const fetchStats = async () => {
+    try {
+      const response = await fetch("/api/tasks/stats")
+      const result = await response.json()
+
+      if (result.success) {
+        setStats(result.data)
+      }
+    } catch (error) {
+      console.error("Error fetching stats:", error)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
     try {
-      const response = await fetch("/api/tasks", {
-        method: "POST",
+      const url = editingTask ? `/api/tasks/${editingTask}` : "/api/tasks"
+      const method = editingTask ? "PUT" : "POST"
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -89,20 +104,30 @@ export default function TasksPage() {
       })
 
       const result = await response.json()
+
       if (result.success) {
-        setTasks([result.data, ...tasks])
-        setFormData({
-          title: "",
-          description: "",
-          priority: "MEDIUM",
-          dueDate: "",
-          projectId: "",
-        })
+        setFormData({ title: "", description: "", priority: "MEDIUM", dueDate: "" })
         setIsDialogOpen(false)
+        setEditingTask(null)
+        fetchTasks()
+        fetchStats()
+      } else {
+        console.error("Failed to save task:", result.error)
       }
     } catch (error) {
-      console.error("Failed to create task:", error)
+      console.error("Error saving task:", error)
     }
+  }
+
+  const handleEdit = (task: Task) => {
+    setFormData({
+      title: task.title,
+      description: task.description,
+      priority: task.priority,
+      dueDate: task.dueDate ? task.dueDate.split("T")[0] : "",
+    })
+    setEditingTask(task.id)
+    setIsDialogOpen(true)
   }
 
   const handleToggleComplete = async (taskId: string, completed: boolean) => {
@@ -112,15 +137,32 @@ export default function TasksPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ completed }),
+        body: JSON.stringify({ completed: !completed }),
       })
 
-      const result = await response.json()
-      if (result.success) {
-        setTasks(tasks.map((task) => (task.id === taskId ? { ...task, completed } : task)))
+      if (response.ok) {
+        fetchTasks()
+        fetchStats()
       }
     } catch (error) {
-      console.error("Failed to update task:", error)
+      console.error("Error toggling task:", error)
+    }
+  }
+
+  const handleDelete = async (taskId: string) => {
+    if (!confirm("确定要删除这个任务吗？")) return
+
+    try {
+      const response = await fetch(`/api/tasks/${taskId}`, {
+        method: "DELETE",
+      })
+
+      if (response.ok) {
+        fetchTasks()
+        fetchStats()
+      }
+    } catch (error) {
+      console.error("Error deleting task:", error)
     }
   }
 
@@ -131,9 +173,9 @@ export default function TasksPage() {
       case "HIGH":
         return "bg-orange-100 text-orange-800"
       case "MEDIUM":
-        return "bg-blue-100 text-blue-800"
+        return "bg-yellow-100 text-yellow-800"
       case "LOW":
-        return "bg-gray-100 text-gray-800"
+        return "bg-green-100 text-green-800"
       default:
         return "bg-gray-100 text-gray-800"
     }
@@ -141,31 +183,16 @@ export default function TasksPage() {
 
   const isOverdue = (dueDate: string | null) => {
     if (!dueDate) return false
-    return new Date(dueDate) < new Date() && !tasks.find((t) => t.dueDate === dueDate)?.completed
+    return new Date(dueDate) < new Date()
   }
 
-  const filterTasks = (filter: string) => {
-    switch (filter) {
-      case "pending":
-        return tasks.filter((task) => !task.completed)
-      case "completed":
-        return tasks.filter((task) => task.completed)
-      case "overdue":
-        return tasks.filter((task) => !task.completed && task.dueDate && isOverdue(task.dueDate))
-      case "today":
-        const today = new Date().toDateString()
-        return tasks.filter((task) => task.dueDate && new Date(task.dueDate).toDateString() === today)
-      default:
-        return tasks
-    }
-  }
-
-  if (loading) {
+  if (loading && tasks.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
         <div className="max-w-6xl mx-auto">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2 mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="h-24 bg-gray-200 rounded"></div>
@@ -197,10 +224,10 @@ export default function TasksPage() {
                 添加任务
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-w-md">
               <DialogHeader>
-                <DialogTitle>创建新任务</DialogTitle>
-                <DialogDescription>添加一个新任务来跟踪你的工作进度</DialogDescription>
+                <DialogTitle>{editingTask ? "编辑任务" : "创建新任务"}</DialogTitle>
+                <DialogDescription>添加一个新任务来跟踪你的工作进度。</DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -221,49 +248,42 @@ export default function TasksPage() {
                     rows={3}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium text-slate-700">优先级</label>
-                    <Select
-                      value={formData.priority}
-                      onValueChange={(value) => setFormData({ ...formData, priority: value })}
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="LOW">低</SelectItem>
-                        <SelectItem value="MEDIUM">中</SelectItem>
-                        <SelectItem value="HIGH">高</SelectItem>
-                        <SelectItem value="URGENT">紧急</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium text-slate-700">截止日期</label>
-                    <Input
-                      type="date"
-                      value={formData.dueDate}
-                      onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-                    />
-                  </div>
+                <div>
+                  <label className="text-sm font-medium text-slate-700">优先级</label>
+                  <Select
+                    value={formData.priority}
+                    onValueChange={(value: any) => setFormData({ ...formData, priority: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="LOW">低</SelectItem>
+                      <SelectItem value="MEDIUM">中</SelectItem>
+                      <SelectItem value="HIGH">高</SelectItem>
+                      <SelectItem value="URGENT">紧急</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-slate-700">截止日期</label>
+                  <Input
+                    type="date"
+                    value={formData.dueDate}
+                    onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
+                  />
                 </div>
                 <div className="flex gap-2 pt-4">
                   <Button type="submit" className="flex-1">
-                    创建任务
+                    {editingTask ? "更新任务" : "创建任务"}
                   </Button>
                   <Button
                     type="button"
                     variant="outline"
                     onClick={() => {
                       setIsDialogOpen(false)
-                      setFormData({
-                        title: "",
-                        description: "",
-                        priority: "MEDIUM",
-                        dueDate: "",
-                        projectId: "",
-                      })
+                      setEditingTask(null)
+                      setFormData({ title: "", description: "", priority: "MEDIUM", dueDate: "" })
                     }}
                   >
                     取消
@@ -280,7 +300,7 @@ export default function TasksPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
-                  <CheckSquare className="h-5 w-5 text-orange-600" />
+                  <CheckSquare className="h-5 w-5 text-blue-600" />
                   <div>
                     <p className="text-sm text-slate-600">总任务</p>
                     <p className="text-2xl font-bold">{stats.total}</p>
@@ -304,7 +324,7 @@ export default function TasksPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-blue-600" />
+                  <Clock className="h-5 w-5 text-yellow-600" />
                   <div>
                     <p className="text-sm text-slate-600">待完成</p>
                     <p className="text-2xl font-bold">{stats.pending}</p>
@@ -316,9 +336,9 @@ export default function TasksPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-red-600" />
+                  <AlertTriangle className="h-5 w-5 text-red-600" />
                   <div>
-                    <p className="text-sm text-slate-600">逾期</p>
+                    <p className="text-sm text-slate-600">已逾期</p>
                     <p className="text-2xl font-bold">{stats.overdue}</p>
                   </div>
                 </div>
@@ -330,16 +350,28 @@ export default function TasksPage() {
         {/* Tasks Tabs */}
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="all">全部任务</TabsTrigger>
-            <TabsTrigger value="pending">待完成</TabsTrigger>
-            <TabsTrigger value="completed">已完成</TabsTrigger>
-            <TabsTrigger value="overdue">逾期</TabsTrigger>
-            <TabsTrigger value="today">今日</TabsTrigger>
+            <TabsTrigger value="all" onClick={() => fetchTasks()}>
+              全部任务
+            </TabsTrigger>
+            <TabsTrigger value="pending" onClick={() => fetchTasks("completed=false")}>
+              待完成
+            </TabsTrigger>
+            <TabsTrigger value="completed" onClick={() => fetchTasks("completed=true")}>
+              已完成
+            </TabsTrigger>
+            <TabsTrigger value="upcoming" onClick={() => fetchTasks("upcoming=true")}>
+              即将到期
+            </TabsTrigger>
+            <TabsTrigger value="overdue" onClick={() => fetchTasks("overdue=true")}>
+              已逾期
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="mt-6">
             <TasksList
-              tasks={filterTasks("all")}
+              tasks={tasks}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
               onToggleComplete={handleToggleComplete}
               getPriorityColor={getPriorityColor}
               isOverdue={isOverdue}
@@ -348,7 +380,9 @@ export default function TasksPage() {
 
           <TabsContent value="pending" className="mt-6">
             <TasksList
-              tasks={filterTasks("pending")}
+              tasks={tasks}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
               onToggleComplete={handleToggleComplete}
               getPriorityColor={getPriorityColor}
               isOverdue={isOverdue}
@@ -357,7 +391,20 @@ export default function TasksPage() {
 
           <TabsContent value="completed" className="mt-6">
             <TasksList
-              tasks={filterTasks("completed")}
+              tasks={tasks}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onToggleComplete={handleToggleComplete}
+              getPriorityColor={getPriorityColor}
+              isOverdue={isOverdue}
+            />
+          </TabsContent>
+
+          <TabsContent value="upcoming" className="mt-6">
+            <TasksList
+              tasks={tasks}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
               onToggleComplete={handleToggleComplete}
               getPriorityColor={getPriorityColor}
               isOverdue={isOverdue}
@@ -366,16 +413,9 @@ export default function TasksPage() {
 
           <TabsContent value="overdue" className="mt-6">
             <TasksList
-              tasks={filterTasks("overdue")}
-              onToggleComplete={handleToggleComplete}
-              getPriorityColor={getPriorityColor}
-              isOverdue={isOverdue}
-            />
-          </TabsContent>
-
-          <TabsContent value="today" className="mt-6">
-            <TasksList
-              tasks={filterTasks("today")}
+              tasks={tasks}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
               onToggleComplete={handleToggleComplete}
               getPriorityColor={getPriorityColor}
               isOverdue={isOverdue}
@@ -389,11 +429,15 @@ export default function TasksPage() {
 
 function TasksList({
   tasks,
+  onEdit,
+  onDelete,
   onToggleComplete,
   getPriorityColor,
   isOverdue,
 }: {
-  tasks: TaskWithRelations[]
+  tasks: Task[]
+  onEdit: (task: Task) => void
+  onDelete: (id: string) => void
   onToggleComplete: (id: string, completed: boolean) => void
   getPriorityColor: (priority: string) => string
   isOverdue: (dueDate: string | null) => boolean
@@ -403,63 +447,73 @@ function TasksList({
       <div className="text-center py-12">
         <CheckSquare className="h-16 w-16 text-slate-300 mx-auto mb-4" />
         <h3 className="text-xl font-medium text-slate-600 mb-2">暂无任务</h3>
-        <p className="text-slate-500">创建你的第一个任务开始管理工作</p>
+        <p className="text-slate-500">创建你的第一个任务来开始管理工作</p>
       </div>
     )
   }
 
   return (
-    <div className="space-y-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {tasks.map((task) => (
         <Card key={task.id} className="bg-white shadow-sm hover:shadow-md transition-shadow">
-          <CardContent className="p-4">
-            <div className="flex items-start gap-4">
-              <Checkbox
-                checked={task.completed}
-                onCheckedChange={(checked) => onToggleComplete(task.id, checked as boolean)}
-                className="mt-1"
-              />
-
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h3 className={`font-medium ${task.completed ? "line-through text-slate-500" : "text-slate-800"}`}>
-                      {task.title}
-                    </h3>
-                    {task.description && <p className="text-sm text-slate-600 mt-1 line-clamp-2">{task.description}</p>}
-                  </div>
-
-                  <div className="flex items-center gap-2 ml-4">
-                    <Badge className={getPriorityColor(task.priority)}>
-                      {task.priority === "URGENT"
-                        ? "紧急"
-                        : task.priority === "HIGH"
-                          ? "高"
-                          : task.priority === "MEDIUM"
-                            ? "中"
-                            : "低"}
-                    </Badge>
-
-                    {task.dueDate && (
-                      <div className="flex items-center gap-1 text-sm">
-                        <Calendar className="h-4 w-4" />
-                        <span className={isOverdue(task.dueDate) ? "text-red-600 font-medium" : "text-slate-600"}>
-                          {new Date(task.dueDate).toLocaleDateString()}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 mt-3 text-sm text-slate-500">
-                  {task.project && <span className="bg-slate-100 px-2 py-1 rounded text-xs">{task.project.name}</span>}
-                  <span>创建于 {new Date(task.createdAt).toLocaleDateString()}</span>
-                  {task.completed && task.completedAt && (
-                    <span>完成于 {new Date(task.completedAt).toLocaleDateString()}</span>
-                  )}
-                </div>
+          <CardHeader className="pb-3">
+            <div className="flex justify-between items-start">
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => onToggleComplete(task.id, task.completed)}
+                  className="rounded"
+                />
+                <Badge className={getPriorityColor(task.priority)}>
+                  {task.priority === "URGENT"
+                    ? "紧急"
+                    : task.priority === "HIGH"
+                      ? "高"
+                      : task.priority === "MEDIUM"
+                        ? "中"
+                        : "低"}
+                </Badge>
+              </div>
+              <div className="flex gap-1">
+                <Button variant="ghost" size="sm" onClick={() => onEdit(task)}>
+                  <Edit className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => onDelete(task.id)}>
+                  <Trash2 className="h-4 w-4 text-red-500" />
+                </Button>
               </div>
             </div>
+            <CardTitle className={`text-lg ${task.completed ? "line-through text-slate-500" : ""}`}>
+              {task.title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription className="mb-4">{task.description}</CardDescription>
+
+            {task.dueDate && (
+              <div className="flex items-center gap-2 mb-2">
+                <Calendar className="h-4 w-4" />
+                <span
+                  className={`text-sm ${
+                    isOverdue(task.dueDate) && !task.completed ? "text-red-600 font-medium" : "text-slate-600"
+                  }`}
+                >
+                  {new Date(task.dueDate).toLocaleDateString()}
+                  {isOverdue(task.dueDate) && !task.completed && " (已逾期)"}
+                </span>
+              </div>
+            )}
+
+            {task.projectName && (
+              <div className="mb-2">
+                <Badge variant="outline" className="text-xs">
+                  {task.projectName}
+                </Badge>
+              </div>
+            )}
+
+            <div className="text-xs text-slate-500">创建于 {new Date(task.createdAt).toLocaleDateString()}</div>
           </CardContent>
         </Card>
       ))}

@@ -1,7 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { TaskRepository } from "@/lib/db/repositories/task-repository"
-
-const taskRepository = new TaskRepository()
+import { taskRepository } from "@/lib/db/repositories"
 
 // 获取单个任务详情
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
@@ -42,7 +40,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const updateData: any = {}
     if (body.title) updateData.title = body.title
     if (body.description !== undefined) updateData.description = body.description
-    if (body.completed !== undefined) {
+    if (body.priority) updateData.priority = body.priority
+    if (body.dueDate) updateData.dueDate = new Date(body.dueDate)
+    if (typeof body.completed === "boolean") {
       updateData.completed = body.completed
       if (body.completed) {
         updateData.completedAt = new Date()
@@ -50,8 +50,6 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         updateData.completedAt = null
       }
     }
-    if (body.priority) updateData.priority = body.priority
-    if (body.dueDate) updateData.dueDate = new Date(body.dueDate)
 
     const task = await taskRepository.update(params.id, updateData)
 

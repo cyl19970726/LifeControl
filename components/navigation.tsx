@@ -5,15 +5,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Target, FolderOpen, BookOpen, Home, Menu, X, CheckSquare, Brain } from "lucide-react"
+import { Target, FolderOpen, BookOpen, Home, Menu, X } from "lucide-react"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
   { name: "Goals", href: "/goals", icon: Target },
   { name: "Projects", href: "/projects", icon: FolderOpen },
-  { name: "Tasks", href: "/tasks", icon: CheckSquare },
   { name: "Reviews", href: "/reviews", icon: BookOpen },
-  { name: "Analytics", href: "/analytics", icon: Brain },
 ]
 
 export function Navigation() {

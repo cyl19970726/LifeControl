@@ -2,7 +2,7 @@ import type { Task, Prisma } from "@prisma/client"
 import { BaseRepository } from "./base-repository"
 
 export type TaskWithRelations = Task & {
-  project?: { id: string; name: string; status: string }
+  project?: { id: string; name: string }
 }
 
 export class TaskRepository extends BaseRepository<Task> {
@@ -10,7 +10,7 @@ export class TaskRepository extends BaseRepository<Task> {
     return this.prisma.task.create({
       data,
       include: {
-        project: { select: { id: true, name: true, status: true } },
+        project: { select: { id: true, name: true } },
       },
     })
   }
@@ -19,7 +19,7 @@ export class TaskRepository extends BaseRepository<Task> {
     return this.prisma.task.findUnique({
       where: { id },
       include: {
-        project: { select: { id: true, name: true, status: true } },
+        project: { select: { id: true, name: true } },
       },
     }) as TaskWithRelations | null
   }
@@ -29,7 +29,7 @@ export class TaskRepository extends BaseRepository<Task> {
       where: { id },
       data,
       include: {
-        project: { select: { id: true, name: true, status: true } },
+        project: { select: { id: true, name: true } },
       },
     })
   }
@@ -44,7 +44,7 @@ export class TaskRepository extends BaseRepository<Task> {
     return this.prisma.task.findMany({
       where: { userId },
       include: {
-        project: { select: { id: true, name: true, status: true } },
+        project: { select: { id: true, name: true } },
       },
       orderBy: { createdAt: "desc" },
     }) as TaskWithRelations[]
@@ -64,13 +64,29 @@ export class TaskRepository extends BaseRepository<Task> {
         completed,
       },
       include: {
-        project: { select: { id: true, name: true, status: true } },
+        project: { select: { id: true, name: true } },
       },
       orderBy: { dueDate: "asc" },
     }) as TaskWithRelations[]
   }
 
-  async findUpcoming(userId: string, days = 7): Promise<TaskWithRelations[]> {
+  async findOverdueTasks(userId: string): Promise<TaskWithRelations[]> {
+    return this.prisma.task.findMany({
+      where: {
+        userId,
+        completed: false,
+        dueDate: {
+          lt: new Date(),
+        },
+      },
+      include: {
+        project: { select: { id: true, name: true } },
+      },
+      orderBy: { dueDate: "asc" },
+    }) as TaskWithRelations[]
+  }
+
+  async findUpcomingTasks(userId: string, days = 7): Promise<TaskWithRelations[]> {
     const endDate = new Date()
     endDate.setDate(endDate.getDate() + days)
 
@@ -79,17 +95,18 @@ export class TaskRepository extends BaseRepository<Task> {
         userId,
         completed: false,
         dueDate: {
+          gte: new Date(),
           lte: endDate,
         },
       },
       include: {
-        project: { select: { id: true, name: true, status: true } },
+        project: { select: { id: true, name: true } },
       },
       orderBy: { dueDate: "asc" },
     }) as TaskWithRelations[]
   }
 
-  async markCompleted(id: string): Promise<Task> {
+  async completeTask(id: string): Promise<Task> {
     return this.prisma.task.update({
       where: { id },
       data: {
@@ -106,8 +123,6 @@ export class TaskRepository extends BaseRepository<Task> {
     overdue: number
     completionRate: number
   }> {
-    const now = new Date()
-
     const [total, completed, overdue] = await Promise.all([
       this.prisma.task.count({ where: { userId } }),
       this.prisma.task.count({ where: { userId, completed: true } }),
@@ -115,7 +130,7 @@ export class TaskRepository extends BaseRepository<Task> {
         where: {
           userId,
           completed: false,
-          dueDate: { lt: now },
+          dueDate: { lt: new Date() },
         },
       }),
     ])
