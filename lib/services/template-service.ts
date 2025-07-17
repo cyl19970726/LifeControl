@@ -3,6 +3,7 @@ import { Template, CreateTemplate, UpdateTemplate, TemplateBlock } from '../type
 import { BlockService } from './block-service'
 import { VectorService } from '../rag/vector-service'
 import { EmbeddingService } from '../rag/embedding-service'
+import { formatDateForSSR, formatTimeForSSR, formatDateTimeForSSR } from '../utils/time'
 
 export class TemplateService {
   private blockService: BlockService
@@ -218,10 +219,11 @@ export class TemplateService {
   private replaceTemplateVariables(text: string, customData?: Record<string, any>): string {
     let result = text
 
-    // Replace common variables
-    result = result.replace(/\{\{date\}\}/g, new Date().toLocaleDateString())
-    result = result.replace(/\{\{time\}\}/g, new Date().toLocaleTimeString())
-    result = result.replace(/\{\{datetime\}\}/g, new Date().toLocaleString())
+    // Replace common variables (SSR-safe)
+    const now = new Date()
+    result = result.replace(/\{\{date\}\}/g, formatDateForSSR(now))
+    result = result.replace(/\{\{time\}\}/g, formatTimeForSSR(now))
+    result = result.replace(/\{\{datetime\}\}/g, formatDateTimeForSSR(now))
 
     // Replace custom variables
     if (customData) {

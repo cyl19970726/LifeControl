@@ -3,6 +3,7 @@ import { openai } from '@ai-sdk/openai'
 import { BlockService } from '../services/block-service'
 import { VectorService } from '../rag/vector-service'
 import { EmbeddingService } from '../rag/embedding-service'
+import { formatDateForSSR } from '../utils/time'
 import { FILL_SUGGESTION_PROMPT, CONTENT_EXTRACTION_PROMPT } from './prompts'
 
 export interface FillResult {
@@ -420,7 +421,7 @@ export class AutoFillEngine {
           ...existingContent,
           rows: [
             ...existingContent.rows,
-            [analysis.extractedContent, new Date().toLocaleDateString()]
+            [analysis.extractedContent, formatDateForSSR(new Date())]
           ]
         }
       

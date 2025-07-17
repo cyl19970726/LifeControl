@@ -8,6 +8,18 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 // Remove old import
 import { X, Send, Loader2, Wrench } from "lucide-react"
+import { useClientTime } from "@/lib/utils/client-time"
+
+// Component to safely display time without hydration errors
+const TimeDisplay = ({ timestamp }: { timestamp: Date }) => {
+  const timeString = useClientTime(timestamp)
+  
+  if (!timeString) {
+    return <span className="text-xs opacity-70 mt-1 block">--:--</span>
+  }
+  
+  return <span className="text-xs opacity-70 mt-1 block">{timeString}</span>
+}
 
 interface Message {
   id: string
@@ -151,7 +163,7 @@ export function ChatAgent({ onClose, context }: ChatAgentProps) {
                   </div>
                 )}
 
-                <span className="text-xs opacity-70 mt-1 block">{message.timestamp.toLocaleTimeString()}</span>
+                <TimeDisplay timestamp={message.timestamp} />
               </div>
             </div>
           ))}

@@ -5,6 +5,18 @@ import { Card } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
 import type { Block } from "@/lib/types/block"
+import { useClientDate } from "@/lib/utils/client-time"
+
+// Component to safely display date without hydration errors
+const DateDisplay = ({ date }: { date: string | Date }) => {
+  const dateString = useClientDate(date)
+  
+  if (!dateString) {
+    return <span>--/--/----</span>
+  }
+  
+  return <span>{dateString}</span>
+}
 
 interface TodoBlockProps {
   block: Block
@@ -71,7 +83,7 @@ export function TodoBlock({ block, mode = 'readonly', onUpdate }: TodoBlockProps
       </div>
       {block.metadata.dueDate && (
         <div className="mt-2 text-xs text-gray-500">
-          到期: {new Date(block.metadata.dueDate).toLocaleDateString()}
+          到期: <DateDisplay date={block.metadata.dueDate} />
         </div>
       )}
     </Card>

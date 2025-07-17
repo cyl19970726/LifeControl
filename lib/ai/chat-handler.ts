@@ -5,6 +5,7 @@ import { BlockService } from '../services/block-service'
 import { VectorService } from '../rag/vector-service'
 import { EmbeddingService } from '../rag/embedding-service'
 import { SYSTEM_PROMPT, CONTEXT_PROMPT } from './prompts'
+import { formatDateForSSR, formatTimeForSSR } from '../utils/time'
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant'
@@ -122,7 +123,7 @@ export class ChatHandler {
           const content = task.content as any
           const metadata = task.metadata as any
           const scheduledTime = metadata?.scheduledAt 
-            ? new Date(metadata.scheduledAt).toLocaleTimeString() 
+            ? formatTimeForSSR(new Date(metadata.scheduledAt), 'Not scheduled')
             : 'Not scheduled'
           return `- ${content.text} (${content.checked ? 'Completed' : 'Pending'}) - ${scheduledTime}`
         }).join('\n')
@@ -130,8 +131,8 @@ export class ChatHandler {
 
     return CONTEXT_PROMPT
       .replace('{{userId}}', userId)
-      .replace('{{currentTime}}', now.toLocaleTimeString())
-      .replace('{{currentDate}}', now.toLocaleDateString())
+      .replace('{{currentTime}}', formatTimeForSSR(now))
+      .replace('{{currentDate}}', formatDateForSSR(now))
       .replace('{{recentBlocks}}', recentBlocksText)
       .replace('{{todaysTasks}}', todaysTasksText)
   }
