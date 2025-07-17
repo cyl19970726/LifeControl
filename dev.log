@@ -1,0 +1,384 @@
+
+> lifeagent@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.16
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1442ms
+ ✓ Compiled /api/chat in 421ms (188 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ POST /api/chat 200 in 5100ms
+ ✓ Compiled /api/blocks in 38ms (190 modules)
+ GET /api/blocks?userId=default-user&limit=1 200 in 76ms
+ POST /api/chat 200 in 5334ms
+ POST /api/chat 200 in 6823ms
+ POST /api/chat 200 in 5567ms
+ POST /api/chat 200 in 4974ms
+ GET /api/chat 400 in 3ms
+(node:85149) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ○ Compiling / ...
+ ✓ Compiled / in 1909ms (815 modules)
+ GET / 200 in 2026ms
+ ✓ Compiled in 126ms (329 modules)
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 74ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 7ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled /p/[id] in 118ms (802 modules)
+ ✓ Compiled /api/blocks/[id] in 45ms (485 modules)
+ GET /api/blocks/cmd6ztydw0007nyp9c4ihvduq 200 in 237ms
+ GET /api/blocks/cmd6ztydw0007nyp9c4ihvduq 200 in 3ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 12ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 6ms
+ GET /api/blocks/cmd6zttuv0004nyp9vpido43r 200 in 5ms
+ GET /api/blocks/cmd6zttuv0004nyp9vpido43r 200 in 3ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 9ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 5ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ POST /api/chat 200 in 8180ms
+ ✓ Compiled in 79ms (333 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 40ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 41ms
+ GET /api/blocks?type=page&userId=default-user&limit=10 200 in 2ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 129ms (697 modules)
+ ✓ Compiled in 70ms (333 modules)
+ ✓ Compiled in 66ms (333 modules)
+ ✓ Compiled in 60ms (333 modules)
+ ✓ Compiled in 64ms (333 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@radix-ui+number@1.1.1' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+number@1.1.1.js', but to 'Error: Can't resolve './vendor-chunks/@radix-ui+number@1.1.1' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@radix-ui+number@1.1.1 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+number@1.1.1.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@radix-ui+react-use-layout-effect@1.1.1_@types+react@18.0.0_react@18.0.0' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-use-layout-effect@1.1.1_@types+react@18.0.0_react@18.0.0.js', but to 'Error: Can't resolve './vendor-chunks/@radix-ui+react-use-layout-effect@1.1.1_@types+react@18.0.0_react@18.0.0' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@radix-ui+react-use-layout-effect@1.1.1_@types+react@18.0.0_react@18.0.0 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-use-layout-effect@1.1.1_@types+react@18.0.0_react@18.0.0.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@radix-ui+react-use-callback-ref@1.1.1_@types+react@18.0.0_react@18.0.0' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-use-callback-ref@1.1.1_@types+react@18.0.0_react@18.0.0.js', but to 'Error: Can't resolve './vendor-chunks/@radix-ui+react-use-callback-ref@1.1.1_@types+react@18.0.0_react@18.0.0' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@radix-ui+react-use-callback-ref@1.1.1_@types+react@18.0.0_react@18.0.0 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-use-callback-ref@1.1.1_@types+react@18.0.0_react@18.0.0.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/clsx@2.1.1' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js', but to 'Error: Can't resolve './vendor-chunks/clsx@2.1.1' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/clsx@2.1.1 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-app-loader.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+ ✓ Compiled /api/chat in 55ms (481 modules)
+ ⨯ Error: Cannot find module './406.js'
+Require stack:
+- /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+- /Users/hhh0x/agent/LifeControl/.next/server/app/api/chat/route.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-server.js
+- /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/start-server.js
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1259:15)
+    at /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require-hook.js:55:36
+    at Function._load (node:internal/modules/cjs/loader:1085:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:218:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1350:12)
+    at mod.require (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at __webpack_require__.f.require (/Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js:203:28)
+    at /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js:116:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js:115:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js:167:22)
+    at /Users/hhh0x/agent/LifeControl/.next/server/app/page.js:1:8711
+    at Object.<anonymous> (/Users/hhh0x/agent/LifeControl/.next/server/app/page.js:1:8764)
+    at Module._compile (node:internal/modules/cjs/loader:1568:14)
+    at Object..js (node:internal/modules/cjs/loader:1711:10)
+    at Module.load (node:internal/modules/cjs/loader:1328:32)
+    at Function._load (node:internal/modules/cjs/loader:1138:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:218:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1350:12)
+    at mod.require (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:138:16)
+    at requirePage (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js:109:84)
+    at /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js:98:84
+    at async loadComponentsImpl (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js:98:26)
+    at async DevServer.findPageComponentsImpl (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/next-server.js:709:36)
+    at async DevServer.findPageComponents (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/base-server.js:1894:24)
+    at async DevServer.renderToResponseImpl (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/base-server.js:1946:32)
+    at async DevServer.pipeImpl (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/base-server.js:921:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/base-server.js:817:17)
+    at async /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-server.js:173:21)
+    at async handleRequest (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-server.js:350:24)
+    at async requestHandlerImpl (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-server.js:374:13)
+    at async Server.requestListener (/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js',
+    '/Users/hhh0x/agent/LifeControl/.next/server/app/api/chat/route.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ✓ Compiled /_error in 408ms (1025 modules)
+ GET / 200 in 39ms
+ ✓ Compiled /_not-found in 72ms (1028 modules)
+ GET /_next/static/css/app/layout.css?v=1752734179040 404 in 102ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 18ms
+ GET /_next/static/chunks/main-app.js?v=1752734179040 404 in 19ms
+ GET /_next/static/chunks/app/page.js 404 in 16ms
+ GET /_next/static/chunks/app/layout.js 404 in 12ms
+ POST /api/chat 200 in 5589ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/clsx@2.1.1' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js', but to 'Error: Can't resolve './vendor-chunks/clsx@2.1.1' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/clsx@2.1.1 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/_not-found/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/_not-found/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0.js', but to 'Error: Can't resolve './vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/_not-found/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/_not-found/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/class-variance-authority@0.7.1' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/class-variance-authority@0.7.1.js', but to 'Error: Can't resolve './vendor-chunks/class-variance-authority@0.7.1' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/class-variance-authority@0.7.1 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/class-variance-authority@0.7.1.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/_not-found/page.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/_not-found/page.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/bundle5.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/webpack/webpack.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/swc/index.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/clsx@2.1.1' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js', but to 'Error: Can't resolve './vendor-chunks/clsx@2.1.1' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/clsx@2.1.1 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/api/blocks/route.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/api/blocks/route.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0.js', but to 'Error: Can't resolve './vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/@radix-ui+react-compose-refs@1.1.2_@types+react@18.0.0_react@18.0.0.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/api/blocks/route.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/api/blocks/route.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+ ✓ Compiled in 116ms (517 modules)
+ ✓ Compiled in 70ms (517 modules)
+ ✓ Compiled in 66ms (517 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/clsx@2.1.1' in /Users/hhh0x/agent/LifeControl/.next/server for build dependencies doesn't lead to expected result '/Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js', but to 'Error: Can't resolve './vendor-chunks/clsx@2.1.1' in '/Users/hhh0x/agent/LifeControl/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/clsx@2.1.1 (expected /Users/hhh0x/agent/LifeControl/.next/server/vendor-chunks/clsx@2.1.1.js)
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/.next/server/app/api/blocks/[id]/route.js
+<w>  at file /Users/hhh0x/agent/LifeControl/.next/server/app/api/blocks/[id]/route.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/handle-externals.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/handle-externals.js
+<w>  at file dependencies /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at file /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+<w>  at resolve commonjs /Users/hhh0x/agent/LifeControl/node_modules/.pnpm/next@14.2.16_@opentelemetry+api@1.9.0_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+ ✓ Compiled /api/blocks in 47ms (508 modules)
+ GET /api/blocks?userId=default-user&limit=1 200 in 87ms
+ ✓ Compiled /api/chat in 34ms (522 modules)
+ POST /api/chat 200 in 6076ms
+ POST /api/chat 200 in 6183ms
+ POST /api/chat 200 in 4571ms
+ ✓ Compiled in 82ms (517 modules)

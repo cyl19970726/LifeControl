@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  blocks    Block[]
+  templates Template[]
+  
+  @@map("users")
+}
+
+model Block {
+  id         String   @id @default(cuid())
+  type       String   // 'text', 'table', 'todo', 'heading', 'callout'
+  content    Json     // Block content data
+  metadata   Json     // Block metadata including tags, category, etc.
+  templateId String?  // Optional template reference
+  parentId   String?  // For nested blocks
+  userId     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  // Relations
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template   Template? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  parent     Block?    @relation("BlockHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children   Block[]   @relation("BlockHierarchy")
+  
+  // Indexes
+  @@index([userId])
+  @@index([type])
+  @@index([templateId])
+  @@index([parentId])
+  @@index([createdAt])
+  @@map("blocks")
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    String   // 'project', 'review'
+  icon        String?
+  tags        String?  // JSON string for SQLite compatibility
+  structure   String   // JSON string for template structure
+  customFields String? // JSON string for custom field definitions
+  metadata    String?  // JSON string for template metadata
+  userId      String
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  blocks      Block[]
+  
+  // Indexes
+  @@index([userId])
+  @@index([category])
+  @@index([isPublic])
+  @@map("templates")
+}
+
+model VectorIndex {
+  id        String   @id @default(cuid())
+  blockId   String   @unique
+  userId    String
+  content   String   // Text content for search
+  embedding String?  // Vector embedding (serialized)
+  metadata  String?  // Additional metadata for search (JSON string)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Indexes
+  @@index([userId])
+  @@index([blockId])
+  @@map("vector_index")
+}

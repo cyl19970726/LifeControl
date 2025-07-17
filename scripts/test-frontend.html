@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeControl API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        button { padding: 8px 16px; margin: 5px; cursor: pointer; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        .loading { opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <h1>🧪 LifeControl API Test Dashboard</h1>
+    
+    <div class="test-section">
+        <h2>1. Get Page Blocks</h2>
+        <button onclick="testGetPages()">Test Get Pages</button>
+        <div id="pages-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Create New Page Block</h2>
+        <button onclick="testCreatePage()">Create Test Page</button>
+        <div id="create-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Chat API Test</h2>
+        <input type="text" id="chat-input" placeholder="Ask AI to create something..." style="width: 300px;">
+        <button onclick="testChat()">Send to AI</button>
+        <div id="chat-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Block Details</h2>
+        <input type="text" id="block-id" placeholder="Enter block ID">
+        <button onclick="testGetBlock()">Get Block Details</button>
+        <div id="block-result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+        
+        function showResult(elementId, content, isError = false) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<pre class="${isError ? 'error' : 'success'}">${content}</pre>`;
+        }
+
+        function setLoading(elementId, isLoading = true) {
+            const element = document.getElementById(elementId);
+            if (isLoading) {
+                element.innerHTML = '<div class="loading">Loading...</div>';
+            }
+        }
+
+        async function testGetPages() {
+            setLoading('pages-result');
+            try {
+                const response = await fetch(`${API_BASE}/blocks?userId=default-user&type=page`);
+                const data = await response.json();
+                showResult('pages-result', JSON.stringify(data, null, 2));
+            } catch (error) {
+                showResult('pages-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testCreatePage() {
+            setLoading('create-result');
+            try {
+                const pageData = {
+                    type: 'page',
+                    content: {
+                        title: 'Frontend Test Page',
+                        description: 'A page created from the test dashboard',
+                        childBlocks: [],
+                        layout: 'default',
+                        visibility: 'private',
+                        icon: '🌐'
+                    },
+                    metadata: {
+                        category: 'test',
+                        tags: ['frontend', 'test'],
+                        aiGenerated: false
+                    },
+                    userId: 'default-user'
+                };
+
+                const response = await fetch(`${API_BASE}/blocks`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(pageData)
+                });
+
+                const data = await response.json();
+                showResult('create-result', JSON.stringify(data, null, 2));
+            } catch (error) {
+                showResult('create-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testChat() {
+            const input = document.getElementById('chat-input').value;
+            if (!input.trim()) {
+                showResult('chat-result', 'Please enter a message', true);
+                return;
+            }
+
+            setLoading('chat-result');
+            try {
+                const response = await fetch(`${API_BASE}/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: input,
+                        userId: 'default-user',
+                        conversationId: 'test-conversation'
+                    })
+                });
+
+                const data = await response.json();
+                showResult('chat-result', JSON.stringify(data, null, 2));
+            } catch (error) {
+                showResult('chat-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testGetBlock() {
+            const blockId = document.getElementById('block-id').value;
+            if (!blockId.trim()) {
+                showResult('block-result', 'Please enter a block ID', true);
+                return;
+            }
+
+            setLoading('block-result');
+            try {
+                const response = await fetch(`${API_BASE}/blocks/${blockId}`);
+                const data = await response.json();
+                showResult('block-result', JSON.stringify(data, null, 2));
+            } catch (error) {
+                showResult('block-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        // Auto-load pages on page load
+        window.onload = () => {
+            testGetPages();
+        };
+    </script>
+</body>
+</html>

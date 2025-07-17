@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import { chatAgent } from "@/lib/agents/chat-agent-v2"
+// Remove old import
 import { X, Send, Loader2, Wrench } from "lucide-react"
 
 interface Message {
@@ -19,15 +19,20 @@ interface Message {
 
 interface ChatAgentProps {
   onClose: () => void
+  context?: {
+    pageId?: string
+    pageTitle?: string
+    message?: string
+  }
 }
 
-export function ChatAgent({ onClose }: ChatAgentProps) {
+export function ChatAgent({ onClose, context }: ChatAgentProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       role: "assistant",
       content:
-        "你好！我是你的LifeAgent智能助手。我可以帮你管理项目、设定目标、添加任务和记录反思。有什么我可以帮助你的吗？",
+        "Hello! I'm your LifeAgent AI assistant. I can help you manage projects, set goals, add tasks, and write reflections. What can I help you with today?",
       timestamp: new Date(),
     },
   ])
@@ -57,15 +62,36 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
     setIsLoading(true)
 
     try {
-      // 使用新的ChatAgent处理消息
-      const response = await chatAgent.processMessage(input)
+      // Use new Tool+LLM+RAG API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: input,
+          userId: 'default-user',
+          conversationId: 'default',
+          context: context
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      const data = await response.json()
+
+      if (!data.success) {
+        throw new Error(data.error || 'Unknown error')
+      }
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: response.message,
+        content: data.data.message,
         timestamp: new Date(),
-        toolResults: response.toolResults,
+        toolResults: data.data.toolCalls || [],
       }
 
       setMessages((prev) => [...prev, assistantMessage])
@@ -73,7 +99,7 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "抱歉，我遇到了一些问题。请稍后再试。",
+        content: "Sorry, I encountered some issues. Please try again later.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -113,7 +139,7 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
                       <div key={idx} className="flex items-center gap-2 text-xs">
                         <Wrench className="h-3 w-3" />
                         <Badge variant={result.success ? "default" : "destructive"} className="text-xs">
-                          {result.toolCall.name}
+                          {result.toolName || 'Unknown tool'}
                         </Badge>
                         {result.success ? (
                           <span className="text-green-600">✓</span>
@@ -155,7 +181,7 @@ export function ChatAgent({ onClose }: ChatAgentProps) {
             <Send className="h-4 w-4" />
           </Button>
         </div>
-        <p className="text-xs text-slate-500 mt-2">我可以帮你创建项目、设定目标、添加任务或记录反思</p>
+        <p className="text-xs text-slate-500 mt-2">I can help you create projects, set goals, add tasks, or write reflections</p>
       </form>
     </div>
   )

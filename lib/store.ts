@@ -17,6 +17,7 @@ export interface Project {
   status: "active" | "paused" | "completed"
   goals: string[]
   createdAt: string
+  customFields?: Record<string, any>
 }
 
 export interface Task {

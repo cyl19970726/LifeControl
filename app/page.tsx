@@ -1,194 +1,280 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { useLifeAgentStore } from "@/lib/store"
 import { ChatAgent } from "@/components/chat-agent"
-import { Target, FolderOpen, CheckSquare, BookOpen, Plus } from "lucide-react"
+import { BlockRenderer } from "@/components/blocks/block-renderer"
+import { Bot, Sparkles, MessageSquare, Target, FolderOpen, BookOpen, Calendar } from "lucide-react"
+import type { Block } from "@/lib/types/block"
 
 export default function HomePage() {
-  const { goals, projects, reviews, tasks } = useLifeAgentStore()
-  const [showChat, setShowChat] = useState(false)
+  const [showChat, setShowChat] = useState(true) // 默认显示聊天界面
+  const [selectedView, setSelectedView] = useState<'overview' | 'insights' | 'activities'>('overview')
+  const [pageBlocks, setPageBlocks] = useState<Block[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const activeProjects = projects.filter((p) => p.status === "active")
-  const todayTasks = tasks.filter(
-    (t) => !t.completed && new Date(t.dueDate).toDateString() === new Date().toDateString(),
-  )
-  const recentReviews = reviews.slice(-3)
+  // 加载页面 blocks
+  useEffect(() => {
+    const loadPageBlocks = async () => {
+      try {
+        const response = await fetch('/api/blocks?type=page&userId=default-user&limit=10')
+        if (response.ok) {
+          const data = await response.json()
+          setPageBlocks(data.data)
+        }
+      } catch (error) {
+        console.error('Failed to load page blocks:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadPageBlocks()
+  }, [])
 
-  const getProjectProgress = (projectId: string) => {
-    const projectTasks = tasks.filter((t) => t.projectId === projectId)
-    const completedTasks = projectTasks.filter((t) => t.completed)
-    return projectTasks.length > 0 ? (completedTasks.length / projectTasks.length) * 100 : 0
-  }
+  // AI Agent 建议的快速操作
+  const aiSuggestions = [
+    {
+      icon: Target,
+      title: "创建目标页面",
+      description: "告诉我你的目标，AI 会自动创建一个完整的目标管理页面",
+      prompt: "帮我创建一个新目标页面，我想要..."
+    },
+    {
+      icon: FolderOpen,
+      title: "创建项目页面",
+      description: "描述你的项目，AI 会自动生成项目管理页面和任务清单",
+      prompt: "帮我创建一个项目页面，项目是关于..."
+    },
+    {
+      icon: BookOpen,
+      title: "创建回顾页面",
+      description: "分享你的想法，AI 会创建个人回顾和反思页面",
+      prompt: "帮我创建一个回顾页面，我想要记录..."
+    },
+    {
+      icon: Calendar,
+      title: "创建计划页面",
+      description: "告诉我你的计划，AI 会创建时间管理和任务调度页面",
+      prompt: "帮我创建一个计划页面，我需要安排..."
+    }
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">LifeAgent Dashboard</h1>
-          <p className="text-slate-600">Your cognitive collaboration workspace for goals, projects, and reflections</p>
-        </div>
-
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Goals Summary */}
-          <Card className="lg:col-span-1">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-lg font-medium flex items-center gap-2">
-                <Target className="h-5 w-5 text-blue-600" />
-                My Goals
-              </CardTitle>
-              <Button variant="ghost" size="sm">
-                <Plus className="h-4 w-4" />
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {goals.slice(0, 3).map((goal) => (
-                  <div key={goal.id} className="p-3 bg-slate-50 rounded-lg">
-                    <h4 className="font-medium text-slate-800">{goal.title}</h4>
-                    <Badge variant="outline" className="mt-1">
-                      {goal.stage}
-                    </Badge>
-                  </div>
-                ))}
-                {goals.length === 0 && (
-                  <p className="text-slate-500 text-sm">No goals set yet. Start by defining your vision!</p>
-                )}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="flex h-screen">
+        {/* 左侧：AI Agent 中心区域 */}
+        <div className="flex-1 flex flex-col">
+          {/* 顶部导航 */}
+          <div className="bg-white/80 backdrop-blur-sm border-b p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                  <Bot className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-slate-800">LifeAgent</h1>
+                  <p className="text-sm text-slate-600">你的AI人生管理助手</p>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Active Projects */}
-          <Card className="lg:col-span-2">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-lg font-medium flex items-center gap-2">
-                <FolderOpen className="h-5 w-5 text-green-600" />
-                Active Projects
-              </CardTitle>
-              <Button variant="ghost" size="sm">
-                <Plus className="h-4 w-4" />
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {activeProjects.map((project) => (
-                  <div key={project.id} className="p-4 border rounded-lg bg-white">
-                    <h4 className="font-medium text-slate-800 mb-2">{project.name}</h4>
-                    <p className="text-sm text-slate-600 mb-3">{project.description}</p>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Progress</span>
-                        <span>{Math.round(getProjectProgress(project.id))}%</span>
-                      </div>
-                      <Progress value={getProjectProgress(project.id)} className="h-2" />
-                    </div>
-                    <div className="flex gap-1 mt-2">
-                      {project.goals.slice(0, 2).map((goalId) => {
-                        const goal = goals.find((g) => g.id === goalId)
-                        return goal ? (
-                          <Badge key={goalId} variant="secondary" className="text-xs">
-                            {goal.title}
-                          </Badge>
-                        ) : null
-                      })}
-                    </div>
-                  </div>
-                ))}
-                {activeProjects.length === 0 && (
-                  <div className="col-span-2 text-center py-8">
-                    <p className="text-slate-500">No active projects. Create your first project to get started!</p>
-                  </div>
-                )}
+              
+              <div className="flex items-center gap-2">
+                <Button
+                  variant={selectedView === 'overview' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSelectedView('overview')}
+                >
+                  概览
+                </Button>
+                <Button
+                  variant={selectedView === 'insights' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSelectedView('insights')}
+                >
+                  洞察
+                </Button>
+                <Button
+                  variant={selectedView === 'activities' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setSelectedView('activities')}
+                >
+                  活动
+                </Button>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </div>
 
-        {/* Bottom Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Today's Tasks */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-medium flex items-center gap-2">
-                <CheckSquare className="h-5 w-5 text-orange-600" />
-                Today's Tasks
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                {todayTasks.map((task) => (
-                  <div key={task.id} className="flex items-center gap-3 p-2 hover:bg-slate-50 rounded">
-                    <input type="checkbox" checked={task.completed} className="rounded" readOnly />
-                    <span className={`flex-1 ${task.completed ? "line-through text-slate-500" : "text-slate-800"}`}>
-                      {task.title}
-                    </span>
-                    <Badge variant="outline" className="text-xs">
-                      {projects.find((p) => p.id === task.projectId)?.name || "General"}
-                    </Badge>
-                  </div>
-                ))}
-                {todayTasks.length === 0 && (
-                  <p className="text-slate-500 text-sm">No tasks for today. Great job staying on top of things!</p>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Recent Reflections */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-medium flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-purple-600" />
-                Recent Reflections
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {recentReviews.map((review) => (
-                  <div key={review.id} className="p-3 bg-slate-50 rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="text-sm font-medium text-slate-800">
-                        {new Date(review.date).toLocaleDateString()}
-                      </span>
-                      <Badge variant="outline" className="text-xs">
-                        {review.type}
-                      </Badge>
-                    </div>
-                    {review.entries.slice(0, 1).map((entry, idx) => (
-                      <p key={idx} className="text-sm text-slate-600 line-clamp-2">
-                        {entry.content}
-                      </p>
+          {/* 主内容区域 */}
+          <div className="flex-1 p-6 overflow-y-auto">
+            {selectedView === 'overview' && (
+              <div className="space-y-6">
+                {/* AI 快速操作建议 */}
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-purple-600" />
+                    AI 建议的快速操作
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {aiSuggestions.map((suggestion, index) => (
+                      <Card 
+                        key={index} 
+                        className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-blue-500"
+                        onClick={() => {
+                          setShowChat(true)
+                          // 这里可以预填充聊天内容
+                        }}
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center">
+                              <suggestion.icon className="w-5 h-5 text-blue-600" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="font-medium text-slate-800 mb-1">{suggestion.title}</h3>
+                              <p className="text-sm text-slate-600">{suggestion.description}</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
                     ))}
                   </div>
-                ))}
-                {recentReviews.length === 0 && (
-                  <p className="text-slate-500 text-sm">No reflections yet. Start documenting your journey!</p>
-                )}
+                </div>
+
+                {/* 我的页面 */}
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-800 mb-4">我的页面</h2>
+                  {loading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="h-24 bg-slate-200 rounded-lg animate-pulse"></div>
+                      ))}
+                    </div>
+                  ) : pageBlocks.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {pageBlocks.map((block) => (
+                        <BlockRenderer 
+                          key={block.id} 
+                          block={block} 
+                          mode="preview"
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <Card className="border-2 border-dashed border-slate-300">
+                      <CardContent className="p-8 text-center">
+                        <Bot className="w-12 h-12 text-slate-400 mx-auto mb-3" />
+                        <h3 className="text-lg font-medium text-slate-600 mb-2">还没有任何页面</h3>
+                        <p className="text-slate-500 mb-4">与 AI 对话来创建你的第一个页面</p>
+                        <Button 
+                          onClick={() => setShowChat(true)}
+                          className="bg-blue-600 hover:bg-blue-700"
+                        >
+                          <MessageSquare className="w-4 h-4 mr-2" />
+                          创建页面
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
+
+                {/* 今日焦点 */}
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-800 mb-4">今日焦点</h2>
+                  <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+                    <CardContent className="p-6">
+                      <div className="text-center">
+                        <Bot className="w-12 h-12 text-blue-600 mx-auto mb-3" />
+                        <h3 className="text-lg font-medium text-slate-800 mb-2">准备好开始了吗？</h3>
+                        <p className="text-slate-600 mb-4">告诉我你今天想要完成什么，或者询问任何关于你的目标和项目的问题。</p>
+                        <Button 
+                          onClick={() => setShowChat(true)}
+                          className="bg-blue-600 hover:bg-blue-700"
+                        >
+                          <MessageSquare className="w-4 h-4 mr-2" />
+                          开始对话
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            )}
+
+            {selectedView === 'insights' && (
+              <div className="space-y-6">
+                <div className="text-center py-12">
+                  <Sparkles className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                  <h3 className="text-xl font-medium text-slate-600 mb-2">AI 洞察分析</h3>
+                  <p className="text-slate-500 mb-6">通过对话告诉我你的情况，我来为你提供个性化的洞察和建议</p>
+                  <Button 
+                    onClick={() => setShowChat(true)}
+                    className="bg-purple-600 hover:bg-purple-700"
+                  >
+                    开始分析
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {selectedView === 'activities' && (
+              <div className="space-y-6">
+                <div className="text-center py-12">
+                  <Calendar className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                  <h3 className="text-xl font-medium text-slate-600 mb-2">最近活动</h3>
+                  <p className="text-slate-500 mb-6">与我对话来回顾你的活动记录和进展情况</p>
+                  <Button 
+                    onClick={() => setShowChat(true)}
+                    className="bg-green-600 hover:bg-green-700"
+                  >
+                    查看活动
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* ChatAgent Toggle */}
-        <div className="fixed bottom-6 right-6">
-          <Button
-            onClick={() => setShowChat(!showChat)}
-            className="rounded-full w-14 h-14 shadow-lg bg-blue-600 hover:bg-blue-700"
-          >
-            🤖
-          </Button>
-        </div>
-
-        {/* ChatAgent Window */}
+        {/* 右侧：聊天界面 */}
         {showChat && (
-          <div className="fixed bottom-24 right-6 w-96 h-96 bg-white rounded-lg shadow-xl border">
-            <ChatAgent onClose={() => setShowChat(false)} />
+          <div className="w-96 bg-white border-l flex flex-col">
+            <div className="p-4 border-b bg-gradient-to-r from-blue-50 to-purple-50">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <Bot className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-slate-800">AI Assistant</h3>
+                    <p className="text-xs text-slate-600">随时为您服务</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setShowChat(false)}
+                  className="text-slate-500 hover:text-slate-700"
+                >
+                  ✕
+                </Button>
+              </div>
+            </div>
+            <div className="flex-1">
+              <ChatAgent onClose={() => setShowChat(false)} />
+            </div>
+          </div>
+        )}
+
+        {/* 浮动聊天按钮 (当聊天界面关闭时显示) */}
+        {!showChat && (
+          <div className="fixed bottom-6 right-6">
+            <Button
+              onClick={() => setShowChat(true)}
+              className="rounded-full w-14 h-14 shadow-lg bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            >
+              <Bot className="w-6 h-6 text-white" />
+            </Button>
           </div>
         )}
       </div>
